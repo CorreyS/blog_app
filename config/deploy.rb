@@ -55,7 +55,7 @@ require "bundler/capistrano"
 
 	  task :symlink_config, roles: :app do
 	    # db migrate
-	    deploy:migrate 	
+	    "deploy:migrate" 	
 	  end
 
 	  before "bundle:install", "deploy:rm_mingw32"
