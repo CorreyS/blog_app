@@ -54,7 +54,8 @@ require "bundler/capistrano"
 	  after "deploy:setup", "deploy:setup_config"
 
 	  task :symlink_config, roles: :app do
-	    # Add database config here
+	    # db migrate
+	    deploy:migrate 	
 	  end
 
 	  before "bundle:install", "deploy:rm_mingw32"
