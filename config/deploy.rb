@@ -2,9 +2,14 @@ require "rvm/capistrano"
 require "bundler/capistrano"
 
   # replace <your app anme> with the name of your app
-  set :application, "blog_app"
+  	set :application, "blog_app"
+	
+  # user the same ruby as used locally for deployment
+	set :rvm_ruby_string, :local
+	
 
 	set :scm, :git
+	set :username, "socialcloud"
   # replace <your github repo uri> with the uri of your github repo
 	set :repository, "git@github.com:CorreyS/blog_app.git"
 	set :branch, "master"
@@ -13,9 +18,13 @@ require "bundler/capistrano"
   # replace <your server dns name> with the dns name of your server
 	server "socialclouddev.cloudapp.net", :web, :app, :db, primary: true
 
-	set :deploy_to, "~/apps/#{application}"
+	set :deploy_to, "/home/#{username}/apps/#{application}"
 	default_run_options[:pty] = true
 	ssh_options[:forward_agent] = true
+
+  # install rvm if not installed, and install ruby as well
+	before 'deploy', 'rvm:install_rvm'
+	before 'deploy', 'rvm:install_ruby'
 
 	namespace :deploy do
 	  desc "Remove mingw32 extensions from Gemfile.lock to re-bundle under LINUX"
