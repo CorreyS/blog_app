@@ -5,7 +5,7 @@ set -e
 # Feel free to change any of the following variables for your app:
 TIMEOUT=${TIMEOUT-60}
 # replace <your app name> with the name of your app
-APP_ROOT=~/apps/blog_app/current
+APP_ROOT=/home/socialcloud/apps/blog_app/current
 PID=$APP_ROOT/tmp/pids/unicorn.pid
 CMD="cd $APP_ROOT; bundle exec unicorn -D -c $APP_ROOT/config/unicorn.rb -E production"
 # replace <your user name> with the name of your user account
